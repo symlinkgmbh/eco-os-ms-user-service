@@ -1,0 +1,16 @@
+{
+  "environment": "development",
+  "version": "0.0.1",
+  "buildDate": "NOW",
+  "buildSHA": "4-8-15-16-23-42",
+  "name": "eco-os-user-service",
+  "serviceId": "015",
+  "server": {
+    "port": "8004"
+  },
+  "mongo": {
+    "db": "secondlock",
+    "collection": "users"
+  },
+  "logVerbose": true
+}

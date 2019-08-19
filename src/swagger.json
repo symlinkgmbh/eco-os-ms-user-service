@@ -1,0 +1,253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The user service handles the whole user management. On start the service will check if the administrator account exist, if not, it will create and adminstration user with the given configuration.",
+    "version": "1.0.0",
+    "title": "2ndLock user service",
+    "termsOfService": "http://2ndLock.com",
+    "contact": {
+      "email": "jens@symlink.de"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "activation",
+      "description": "Account activation and deactivation"
+    },
+    {
+      "name": "import",
+      "description": "Import a bunch of users by uploading a csv file"
+    },
+    {
+      "name": "password",
+      "description": "Password forgot and change"
+    },
+    {
+      "name": "accounts",
+      "description": "account management"
+    },
+    {
+      "name": "heartbeat",
+      "description": "Get current heartbeat from service"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/account": {
+      "post": {
+        "tags": ["accounts"],
+        "summary": "create account",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user to add",
+            "schema": {
+              "type": "object",
+              "required": ["email"],
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              },
+              "example": [
+                {
+                  "email": "test@test.com"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      },
+      "get": {
+        "tags": ["accounts"],
+        "summary": "get all accounts",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      }
+    },
+    "/account/id": {
+      "get": {
+        "tags": ["accounts"],
+        "summary": "get account by account id",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["accounts"],
+        "summary": "update account by account id",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["accounts"],
+        "summary": "delete account by account id",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/account/email/email": {
+      "get": {
+        "tags": ["accounts"],
+        "summary": "load account by email",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/account/search/query": {
+      "get": {
+        "tags": ["accounts"],
+        "summary": "search for email",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/password/forgot": {
+      "post": {
+        "tags": ["password"],
+        "summary": "send password forgot request",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/password/update": {
+      "post": {
+        "tags": ["password"],
+        "summary": "set new password for account",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/import": {
+      "post": {
+        "tags": ["import"],
+        "summary": "import users by csv file",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/account/activation/id": {
+      "get": {
+        "tags": ["activation"],
+        "summary": "load user by activation id",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/account/activation/activate": {
+      "post": {
+        "tags": ["activation"],
+        "summary": "activate account",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/account/activation/deactivate/id": {
+      "get": {
+        "tags": ["activation"],
+        "summary": "deactivate account",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/heartbeat": {
+      "get": {
+        "tags": ["heartbeat"],
+        "summary": "get current heartbeat from service",
+        "description": "response with current service health",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
