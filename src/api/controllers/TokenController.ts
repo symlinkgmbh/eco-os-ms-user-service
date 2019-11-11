@@ -19,7 +19,7 @@
 
 import { PkStroageUser, MsOverride } from "@symlinkde/eco-os-pk-models";
 import { userContainer, USER_TYPES } from "@symlinkde/eco-os-pk-storage-user";
-import { CustomRestError } from "@symlinkde/eco-os-pk-api";
+import { CustomRestError, apiResponseCodes } from "@symlinkde/eco-os-pk-api";
 
 export class TokenController {
   private userService: PkStroageUser.IUserService;
@@ -33,8 +33,8 @@ export class TokenController {
     if (user === undefined || user === null) {
       throw new CustomRestError(
         {
-          code: 400,
-          message: "invalid token",
+          code: apiResponseCodes.C845.code,
+          message: apiResponseCodes.C845.message,
         },
         400,
       );
@@ -47,8 +47,8 @@ export class TokenController {
     if (user === undefined || user === null) {
       throw new CustomRestError(
         {
-          code: 400,
-          message: "invalid token",
+          code: apiResponseCodes.C845.code,
+          message: apiResponseCodes.C845.message,
         },
         400,
       );
@@ -61,8 +61,8 @@ export class TokenController {
     if (user === undefined || user === null) {
       throw new CustomRestError(
         {
-          code: 400,
-          message: "invalid token",
+          code: apiResponseCodes.C845.code,
+          message: apiResponseCodes.C845.message,
         },
         400,
       );

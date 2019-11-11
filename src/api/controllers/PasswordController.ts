@@ -50,8 +50,8 @@ export class PasswordController {
     if (user._id === undefined) {
       throw new CustomRestError(
         {
-          code: 400,
-          message: "User could not be updated",
+          code: apiResponseCodes.C840.code,
+          message: apiResponseCodes.C840.message,
         },
         400,
       );
@@ -64,8 +64,8 @@ export class PasswordController {
     if (!updateUserResult) {
       throw new CustomRestError(
         {
-          code: 400,
-          message: "User could not be updated",
+          code: apiResponseCodes.C840.code,
+          message: apiResponseCodes.C840.message,
         },
         400,
       );
@@ -123,8 +123,8 @@ export class PasswordController {
     if (user.lastPasswordHash === StaticShaService.getSha3(obj.password)) {
       throw new CustomRestError(
         {
-          code: 400,
-          message: "password must be different then your old one",
+          code: apiResponseCodes.C834.code,
+          message: apiResponseCodes.C834.message,
         },
         400,
       );

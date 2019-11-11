@@ -25,3 +25,4 @@ export * from "./Activation";
 export * from "./Metrics";
 export * from "./LicenseBeat";
 export * from "./Key";
+export * from "./InternalConfig";

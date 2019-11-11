@@ -39,8 +39,8 @@ export class ActivationController {
     if (user === undefined || user === null) {
       throw new CustomRestError(
         {
-          code: 404,
-          message: `User not found with activation id: ${activationId}`,
+          code: apiResponseCodes.C838.code,
+          message: apiResponseCodes.C838.message + activationId,
         },
         404,
       );
@@ -53,8 +53,8 @@ export class ActivationController {
     if (user === null || user._id === undefined) {
       throw new CustomRestError(
         {
-          code: 404,
-          message: `User not found with deactivation id: ${activationId}`,
+          code: apiResponseCodes.C839.code,
+          message: apiResponseCodes.C839.message + activationId,
         },
         404,
       );
@@ -79,8 +79,8 @@ export class ActivationController {
     if (deactivatedUser === null) {
       throw new CustomRestError(
         {
-          code: 404,
-          message: `User not found with deactivation id: ${activationId}`,
+          code: apiResponseCodes.C838.code,
+          message: apiResponseCodes.C838.message + activationId,
         },
         404,
       );
@@ -153,8 +153,8 @@ export class ActivationController {
     if (!response) {
       throw new CustomRestError(
         {
-          code: 400,
-          message: "User could not be updated",
+          code: apiResponseCodes.C840.code,
+          message: apiResponseCodes.C840.message + activationId,
         },
         400,
       );

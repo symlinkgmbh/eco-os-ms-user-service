@@ -126,8 +126,8 @@ export class UserController {
     if (!user._id) {
       throw new CustomRestError(
         {
-          code: 404,
-          message: "User not found",
+          code: apiResponseCodes.C846.code,
+          message: apiResponseCodes.C846.message,
         },
         404,
       );
@@ -138,8 +138,8 @@ export class UserController {
     if (!update) {
       throw new CustomRestError(
         {
-          code: 400,
-          message: "Problem in set delete id for user",
+          code: apiResponseCodes.C847.code,
+          message: apiResponseCodes.C847.message,
         },
         400,
       );

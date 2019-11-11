@@ -28,12 +28,14 @@ import {
   MetricsRoute,
   LicenseBeat,
   KeyRoute,
+  ConfigBeat,
 } from "./routes";
 import { TokenRoute } from "./routes/Token";
 
 export class Router implements PkApi.IRouter {
   protected heartbeat: Heartbeat | undefined;
   protected licenseBeat: LicenseBeat | undefined;
+  protected configBeat: ConfigBeat | undefined;
   protected userRoute: UserRoute | undefined;
   protected passwordRoute: PasswordRoute | undefined;
   protected importRoute: ImportRoute | undefined;
@@ -55,6 +57,7 @@ export class Router implements PkApi.IRouter {
     this.importRoute = new ImportRoute(this.app);
     this.activationRoute = new ActivationRoute(this.app);
     this.metrics = new MetricsRoute(this.app);
+    this.configBeat = new ConfigBeat(this.app);
     this.licenseBeat = new LicenseBeat(this.app);
     this.tokenRoute = new TokenRoute(this.app);
     this.keyRoute = new KeyRoute(this.app);

@@ -17,22 +17,24 @@
 
 
 
-import { MsUser, MsOverride } from "@symlinkde/eco-os-pk-models";
+import { AbstractRoutes } from "@symlinkde/eco-os-pk-api";
+import { PkApi } from "@symlinkde/eco-os-pk-models";
+import { Application, Request, Response, NextFunction } from "express";
+import Config from "config";
 
-export class KeyController {
-  public async addKeyToUser(req: MsOverride.IRequest): Promise<MsUser.IUser | null> {
-    return null;
+export class ConfigBeat extends AbstractRoutes implements PkApi.IRoute {
+  constructor(app: Application) {
+    super(app);
+    this.activate();
   }
 
-  public async loadUserByApiKey(req: MsOverride.IRequest): Promise<MsUser.IUser | null> {
-    return null;
-  }
-
-  public async removeKeyFromUser(req: MsOverride.IRequest): Promise<MsUser.IUser | null> {
-    return null;
-  }
-
-  public async removeAllKeysFromUser(req: MsOverride.IRequest): Promise<boolean> {
-    return true;
+  public activate(): void {
+    this.getApp()
+      .route("/internal")
+      .get((req: Request, res: Response, next: NextFunction) => {
+        res.send(<PkApi.IConfigBeat>{
+          config: Config.util.toObject(),
+        });
+      });
   }
 }

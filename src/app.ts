@@ -64,28 +64,22 @@ export class Bootstrapper {
     serviceContainer.rebind("SECONDLOCK_REGISTRY_URI").toConstantValue(process.env.SECONDLOCK_REGISTRY_URI);
   }
 
-  public init(): Promise<Application> {
-    return new Promise((resolve, reject) => {
-      Promise.all([this.initLogSystem(), this.bootstrapper.signInServiceRegistry(), this.initAdminUser()])
-        .then(() => {
-          resolve(this.api.init());
-        })
-        .catch((err) => {
-          Log.log(err, LogLevel.error);
-          reject(err);
-        });
-    });
+  public async init(): Promise<Application> {
+    try {
+      this.initLogSystem();
+      await this.initAdminUser();
+      await this.bootstrapper.signInServiceRegistry();
+      return await this.api.init();
+    } catch (err) {
+      Log.log(err, LogLevel.error);
+      process.exit(1);
+      throw new Error(err);
+    }
   }
 
-  private initLogSystem(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      try {
-        resolve(Log.log(`init ${Config.get("name")} ${Config.get("version")}`, LogLevel.info));
-      } catch (err) {
-        Log.log(err, LogLevel.error);
-        reject(err);
-      }
-    });
+  private initLogSystem(): void {
+    Log.log(`init ${Config.get("name")} ${Config.get("version")}`, LogLevel.info);
+    return;
   }
 
   private async initAdminUser(): Promise<void> {
@@ -115,9 +109,11 @@ export class Bootstrapper {
           true,
           SECONDLOCK_ADMIN_PASSWORD,
         );
+        return;
       } catch (err) {
         if (err.error && err.error.code === 803) {
           Log.log("admin already exists", LogLevel.info);
+          return;
         } else {
           Log.log(err, LogLevel.error);
           process.exit(1);
@@ -126,7 +122,6 @@ export class Bootstrapper {
     } else {
       Log.log("no environment variables for admin creation found", LogLevel.info);
     }
-
     return;
   }
 }

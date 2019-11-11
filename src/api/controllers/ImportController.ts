@@ -39,7 +39,7 @@ export class ImportControler {
         email: String(users[index]),
       };
 
-      const createdUser = await this.userService.createUser(user);
+      const createdUser = await this.userService.createUser(user, true, false, false);
       if (createdUser instanceof User) {
         createdUsers.push(createdUser);
       }
