@@ -29,6 +29,8 @@ import {
   LicenseBeat,
   KeyRoute,
   ConfigBeat,
+  AliasRoute,
+  ApikeyGroupRoute,
 } from "./routes";
 import { TokenRoute } from "./routes/Token";
 
@@ -43,6 +45,8 @@ export class Router implements PkApi.IRouter {
   protected metrics: MetricsRoute | undefined;
   protected tokenRoute: TokenRoute | undefined;
   protected keyRoute: KeyRoute | undefined;
+  protected aliasRoute: AliasRoute | undefined;
+  protected apikeyGroupRoute: ApikeyGroupRoute | undefined;
 
   private app: Application;
 
@@ -61,6 +65,8 @@ export class Router implements PkApi.IRouter {
     this.licenseBeat = new LicenseBeat(this.app);
     this.tokenRoute = new TokenRoute(this.app);
     this.keyRoute = new KeyRoute(this.app);
+    this.aliasRoute = new AliasRoute(this.app);
+    this.apikeyGroupRoute = new ApikeyGroupRoute(this.app);
     return;
   }
 }

@@ -26,3 +26,5 @@ export * from "./Metrics";
 export * from "./LicenseBeat";
 export * from "./Key";
 export * from "./InternalConfig";
+export * from "./Alias";
+export * from "./ApikeyGroup";
